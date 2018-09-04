@@ -1,0 +1,20 @@
+#include<stdio.h>
+main()
+{
+	char message,cipher;
+	while((message=getchar())!='\n')
+	{
+		if(message>='A'&&message<='Z')
+		{
+			message=message-65;
+			cipher=(message*3+5)%26+65;
+		}
+		else
+		{
+		    message=message-97;
+		    cipher=(message*3+5)%26+97;
+		}
+		printf("%c",cipher);
+	}
+	printf("\n");
+}
