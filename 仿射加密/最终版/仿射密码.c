@@ -8,7 +8,7 @@ int max(int number1,int number2);
 int min(int number1,int number2);
 char message[1000]="0";
 char cipher[1000]="0";
-main()
+int main()
 {
 
 	int c;
@@ -51,6 +51,9 @@ main()
 		}
 	default:printf("enter data error!\n");
 	}
+	
+	getchar();
+	return 0; 
 }
 
 void encrypt(int k1,int k2)
