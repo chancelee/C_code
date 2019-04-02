@@ -96,6 +96,7 @@ void decrypt(int k1,int k2)
 		else
 			message[i]=cipher[i];
 	}
+	printf("k3:%d\n",k3%26); 
 	puts(message);
 }
 void brute()
