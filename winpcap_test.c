@@ -357,7 +357,6 @@ void PrintTcpPacket(u_char* Buffer, int Size)
 	fprintf(logfile, " | -Push Flag : %d\n" , (unsigned int)tcpheader->psh);
 	fprintf(logfile, " | -Reset Flag : %d\n" , (unsigned int)tcpheader->rst);
 	fprintf(logfile, " | -Synchronise Flag : %d\n" , (unsigned int)tcpheader->syn);
-	fprintf(logfile
 	fprintf(logfile, " | -Checksum : %d\n" , ntohs(tcpheader->checksum));
 	fprintf(logfile, " | -Urgent Pointer : %d\n" , tcpheader->urgent_pointer);
 	fprintf(logfile, " \n");
