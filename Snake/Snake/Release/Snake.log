@@ -1,0 +1,10 @@
+﻿  ctrl.cpp
+ctrl.cpp(335): warning C4018: “<”: 有符号/无符号不匹配
+ctrl.cpp(354): warning C4018: “<”: 有符号/无符号不匹配
+  正在生成代码
+  4 of 249 functions ( 1.6%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    2 functions had inline decision re-evaluated but remain unchanged
+  已完成代码的生成
+  Snake.vcxproj -> F:\proooooooooooogram\15pb\Snake\Release\Snake.exe
+  Snake.vcxproj -> F:\proooooooooooogram\15pb\Snake\Release\Snake.pdb (Full PDB)
