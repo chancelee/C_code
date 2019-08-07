@@ -56,20 +56,18 @@ void SetPlayerNum(int *pPlayerNum)
 
 void InitPlayersAndEnemies(PTank pPlayer, int nPlayerNum, PTank pEnemy)
 {
-	/*
-	Init the players and enemies.
-	*/
-	for (int i = 0; i < nPlayerNum; i++)
+	
+	InitTank(&pPlayer[0], TRUE, g_playerBeginPosX[0], g_playerBeginPosY, UP, COLOR_PLAYER1);
+	if (nPlayerNum == 2)
 	{
-		InitTank(&pPlayer[i], TRUE, g_playerBeginPosX[i], g_playerBeginPosY, UP, COLOR_PLAYER1);
+		InitTank(&pPlayer[1], TRUE, g_playerBeginPosX[1], g_playerBeginPosY, UP, COLOR_PLAYER2);
+
 	}
-	pPlayer[1].m_wColor = COLOR_PLAYER2;
 
 	for (int i = 0; i < ENEMY_NUM; i++)
 	{
 		InitTank(&pEnemy[i], FALSE, g_enemyBeginPosX[i % 3], g_enemyBeginPosY, DOWN, COLOR_ENEMY);
 	}
-	// Init end.
 }
 
 void StartGame(int nMission,PTank pPlayer,int nPlayerNum,PTank pEnemy)
@@ -283,6 +281,8 @@ void StartGame(int nMission,PTank pPlayer,int nPlayerNum,PTank pEnemy)
 		}
 		else
 		{
+			SetConsoleTextAttribute(hOut, COLOR_LAND);
+			system("cls");
 			return;
 		}
 	}
@@ -291,6 +291,9 @@ void StartGame(int nMission,PTank pPlayer,int nPlayerNum,PTank pEnemy)
 		WriteChar(MAP_LEN / 2, MAP_WID / 2, "GAGE OVER", COLOR_TEXT);
 		WriteChar(MAP_LEN / 2, MAP_WID / 2 + 1, "Press any key to return.", COLOR_TEXT);
 		_getch();
+		SetConsoleTextAttribute(hOut, COLOR_LAND);
+		system("cls");
+		return;
 	}
 	
 }
@@ -394,6 +397,7 @@ void BulletCollisionCheck(PTank pPlayer, int nPlayerNum, PTank pEnemy)
 		{
 			if (pPlayer[i].m_bullets[j].used)
 			{
+				int k = 0;
 				switch (g_map[pPlayer[i].m_bullets[j].m_posX][pPlayer[i].m_bullets[j].m_posY] & 0xF0)
 				{
 				case PLAYER:
@@ -410,29 +414,11 @@ void BulletCollisionCheck(PTank pPlayer, int nPlayerNum, PTank pEnemy)
 					
 
 
-					int k = g_map[pPlayer[i].m_bullets[j].m_posX][pPlayer[i].m_bullets[j].m_posY] & 0x0F;
+					k = g_map[pPlayer[i].m_bullets[j].m_posX][pPlayer[i].m_bullets[j].m_posY] & 0x0F;
 					--pEnemy[k].m_nHP;
 					WriteInt(MAP_LEN + 4, 7 + 5 * i, ++pPlayer[i].m_nKill, COLOR_TEXT);
 					UnmarkTank(&pEnemy[k]);
 					ClsTank(&pEnemy[k]);
-					break;
-
-
-
-					/*for (int k = 0; k < ENEMY_NUM; k++)
-					{
-						if (inBody(&pEnemy[k], pPlayer[i].m_bullets[j].m_posX, pPlayer[i].m_bullets[j].m_posY))
-						{
-							--pEnemy[k].m_nHP;
-							WriteInt(MAP_LEN + 4, 7 + 5 * i, ++pPlayer[i].m_nKill, COLOR_TEXT);
-							UnmarkTank(&pEnemy[k]);
-							ClsTank(&pEnemy[k]);
-							break;
-						}
-					};*/
-
-
-
 					break;
 				case HEART:
 					g_map[pPlayer[i].m_bullets[j].m_posX][pPlayer[i].m_bullets[j].m_posY] = LAND;
@@ -464,6 +450,7 @@ void BulletCollisionCheck(PTank pPlayer, int nPlayerNum, PTank pEnemy)
 		{
 			if (pEnemy[i].m_bullets[j].used)
 			{
+				int k = 0;
 				switch (g_map[pEnemy[i].m_bullets[j].m_posX][pEnemy[i].m_bullets[j].m_posY] & 0xF0)
 				{
 				case PLAYER:
@@ -473,7 +460,7 @@ void BulletCollisionCheck(PTank pPlayer, int nPlayerNum, PTank pEnemy)
 					PlaySoundA("sound\\pwn.wav", NULL, SND_ASYNC | SND_FILENAME | SND_NODEFAULT);
 					pEnemy[i].m_bullets[j].used = 0;
 					
-					int k = g_map[pEnemy[i].m_bullets[j].m_posX][pEnemy[i].m_bullets[j].m_posY] & 0x0F;
+					k = g_map[pEnemy[i].m_bullets[j].m_posX][pEnemy[i].m_bullets[j].m_posY] & 0x0F;
 					--(pPlayer[k].m_nHP);
 					WriteInt(MAP_LEN + 4, 6 + 5 * k, pPlayer[k].m_nHP, COLOR_TEXT);
 
@@ -481,23 +468,6 @@ void BulletCollisionCheck(PTank pPlayer, int nPlayerNum, PTank pEnemy)
 					ClsTank(&pPlayer[k]);
 					pPlayer[k].m_posX = (k ? g_playerBeginPosX[1] : g_playerBeginPosX[0]);
 					pPlayer[k].m_posY = g_playerBeginPosY;
-					break;
-
-					/*for (int k = 0; k < nPlayerNum; k++)
-					{
-						if (inBody(&pPlayer[k], pEnemy[i].m_bullets[j].m_posX, pEnemy[i].m_bullets[j].m_posY))
-						{
-							--(pPlayer[k].m_nHP);
-							WriteInt(MAP_LEN + 4, 6 + 5 * k, pPlayer[k].m_nHP, COLOR_TEXT);
-
-							UnmarkTank(&pPlayer[k]);
-							ClsTank(&pPlayer[k]);
-							pPlayer[k].m_posX = ( k ? g_playerBeginPosX[1] : g_playerBeginPosX[0]);
-							pPlayer[k].m_posY = g_playerBeginPosY;
-							break;
-						}
-					};*/
-
 					break;
 				case ENEMY:
 					//enemy shoot enemy
