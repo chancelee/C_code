@@ -5,16 +5,23 @@
 #include "UI.h"
 #include "Attr.h"
 
+
 /*
-	Directions
+Tank 's attributes
+*/
+
+
+/*
+	Direction attributes.
 */
 #define UP			0
 #define DOWN		1
 #define LEFT		2
 #define RIGHT		3
 
+
 /*
-	Tank 's attributes
+	Number attributes.
 */
 #define BULLETSNUM_PER_TANK 3
 #define TANK_SPEED	120
@@ -29,10 +36,15 @@
 #define COLOR_ENEMY		BACKGROUND_BLUE | BACKGROUND_RED
 #define COLOR_BARREL	FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY | COLOR_PLAYER1
 
+/*
+	Tank's shape is controlled by 4 2-dimension arrays. 
+*/
 extern char g_tankShape[4][3][3];
 
+
 /*
-	The struct of tank, including position,level,direction and score etc...
+	The struct of bullets, which will be initialized in Tank's constructor.
+	When the tank fires, "used" will be set.
 */
 typedef struct _Bullet
 {
@@ -44,6 +56,11 @@ typedef struct _Bullet
 
 }Bullet, *PBullet;
 
+
+/*
+	The struct of tank, including position,direction and score etc...
+	Tank's old positions are also stored to be cleand while moving.
+*/
 typedef struct _TANK
 {
 	BOOL		 m_bIsPlayer;
@@ -52,8 +69,6 @@ typedef struct _TANK
 	unsigned int m_oldPosX;
 	unsigned int m_oldPosY;
 
-	unsigned int m_nLevel;
-	
 	unsigned int m_nHP;
 	
 	unsigned int m_nDirection;
@@ -75,10 +90,20 @@ typedef struct _TANK
 */
 void InitTank(PTank pTank,BOOL bIsPlayer, int nPosX, int nPosY, int nDirection, WORD wAttr);
 
+/*
+	Display and Clean one tank on the screen.
+*/
 void DisplayTank(PTank pTank);
 void ClsTank(PTank pTank);
 
+/*
+	Activate the tank's unused bullet, and set the bullet's direction and positions.
+*/
 void Fire(PTank pTank);
+
+/*
+	This function should be called after bullet collision check.
+	Every player and enemy's bullets will be checked in this function, if any bullet is used, its old position will cleaned , then its new position will be displayed.
+*/
 void BulletMoveAndDisplay(PTank pTank, int nPlayerNum, PTank pEnemy, int nEnemyNum);
 
-BOOL inBody(PTank pTank, unsigned int x, unsigned int y);

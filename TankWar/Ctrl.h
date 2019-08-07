@@ -31,11 +31,20 @@ int MoveInMap(PTank pTank,BYTE dir);
 void BulletCollisionCheck(PTank pTank, int nPlayerNum, PTank pEnemy);
 
 /*
-	Mark and unmark the position of tank on the 2-dimension map
+	Mark the position of tank on the 2-dimension map.
+	PLAYER | nIndex or ENEMY | nIndex will assigned to the tank's position on the map, which is useful for bullet collision checking.
 */
-void MarkTank(PTank pTank);
+void MarkTank(PTank pTank, int nIndex);
+/*
+	Set the old position of tank on the 2-dimension map to LAND.
+*/
 void UnmarkTank(PTank pTank);
 
+/*
+	Save and load a backup.
+	The data includes mission, map, players and enemies.
+	The .bk file is named by local time , and be stored in "backup" directory.
+*/
 int SaveBk(int nMission, PTank pPlayer, PTank pEnemy);
 int LoadBk(int *pnMission, PTank pPlayer, PTank pEnemy);
 

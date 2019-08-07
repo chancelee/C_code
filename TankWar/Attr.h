@@ -4,6 +4,8 @@
 
 /*
 	Map attribute index.
+	For PLAYER and ENEMY, the lower 4 bits stand for the index of the tank in players or enemies array.
+	For example, 0x21 means this tank is an enemy, and its index is 1 in enemies array.
 */
 
 #define PLAYER		0x10

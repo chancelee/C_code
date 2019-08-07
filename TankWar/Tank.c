@@ -39,8 +39,6 @@ void InitTank(PTank pTank, BOOL bIsPlayer, int nPosX, int nPosY, int nDirection,
 	pTank->m_oldPosX = nPosX;
 	pTank->m_oldPosY = nPosY;
 
-	pTank->m_nLevel = 0;
-
 	if (bIsPlayer)
 	{
 		pTank->m_nHP = 3;
@@ -237,17 +235,6 @@ void BulletMoveAndDisplay(PTank pPlayer, int nPlayerNum, PTank pEnemy, int nEnem
 			}
 		}
 	}
-}
-
-BOOL inBody(PTank pTank, unsigned int posx, unsigned int posy)
-{
-	if (posx >= pTank->m_posX && posx < pTank->m_posX + 3
-		&& posy >= pTank->m_posY && posy < pTank->m_posY + 3)
-	{
-		return TRUE;
-	}
-	return FALSE;
-
 }
 
 

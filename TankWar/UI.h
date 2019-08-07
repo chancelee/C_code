@@ -16,8 +16,20 @@
 
 extern char *pTankPic;
 
+/*
+	Write strings and numbers on the screen.
+	 wAttr parameters are provided in Attr.h and Tank.h.
+*/
 void WriteChar(int x, int y, char *pStr, WORD wAttr);
 void WriteInt(int x, int y, int nNum, WORD wAttr);
 
+/*
+Set the window's size, mouse's attribute, and screen color.
+*/
 void InitWindow();
+
+/*
+	Provides 4 options for players.
+	Players type UP/DOWN to select.
+*/
 void WelcomeAndOption(char *pChoice);
