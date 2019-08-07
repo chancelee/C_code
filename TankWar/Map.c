@@ -7,31 +7,6 @@ int g_playerBeginPosX[2]= { MAP_LEN / 2 - 4 , MAP_LEN / 2 + 2 };
 int g_enemyBeginPosY = 1;
 int g_enemyBeginPosX[3] = { 1, MAP_LEN / 2 , MAP_LEN - 4 };
 
-void InitMap()
-{
-	memset(g_map, LAND, MAP_WID * MAP_LEN);
-
-	memset(g_map, OBSTACLE, MAP_WID);
-	for (int i = 1; i < MAP_LEN; i++)
-	{
-		g_map[i][0] = OBSTACLE;
-		g_map[i][MAP_WID - 1] = OBSTACLE;
-	}
-	memset(&g_map[MAP_LEN - 1], OBSTACLE, MAP_WID);
-
-	g_map[MAP_LEN / 2 - 1][MAP_WID - 2] = BLOCK;
-	g_map[MAP_LEN / 2 - 1][MAP_WID - 3] = BLOCK;
-	g_map[MAP_LEN / 2 - 1][MAP_WID - 4] = BLOCK;
-	g_map[MAP_LEN / 2    ][MAP_WID - 4] = BLOCK;
-	g_map[MAP_LEN / 2 + 1][MAP_WID - 4] = BLOCK;
-	g_map[MAP_LEN / 2 + 1][MAP_WID - 3] = BLOCK;
-	g_map[MAP_LEN / 2 + 1][MAP_WID - 2] = BLOCK;
-
-	g_map[MAP_LEN / 2][MAP_WID - 3] = HEART;
-
-	
-}
-
 void DisplayMap()
 {
 	for (int i = 0; i < MAP_LEN; i++)
