@@ -12,22 +12,34 @@
 
 #define ENEMY_NUM	6
 
-
+/*
+	Init the players and enemies after the number of players is set.
+*/
 void SetPlayerNum(int *pPlayerNum);
 void InitPlayersAndEnemies(PTank pPlayer,int nPlayerNum,PTank pEnemy);
 
 /*
-	Single player mode.
+	Game procedure:
+		1. Check whether all missions are completed.
+		2. Load and display the mission or player-designed map.
+		3. Display player's tank.
+		4. Enter the main loop.
+			Conditions: players are alive, heart not destroyed and any enemy alive.
+		5. If players win, enter next mission or return (nMission < 1).
+			Else, lose and return.
+
 */
 void StartGame(int nMission, PTank pPlayer, int nPlayerNum, PTank pEnemy);
 
 /*
+	If the tank move forward or change its direction successfully, return TRUE.
+	Else if collision happens, return FALSE;
 */
-int MoveInMap(PTank pTank,BYTE dir);
+BOOL MoveInMap(PTank pTank,BYTE dir);
 
 /*
 	Check the collision of bullet and process it.
-*/
+*/ 
 void BulletCollisionCheck(PTank pTank, int nPlayerNum, PTank pEnemy);
 
 /*
