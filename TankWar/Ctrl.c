@@ -85,20 +85,25 @@ void StartGame(int nMission,PTank pPlayer,int nPlayerNum,PTank pEnemy)
 	clock_t enemy_time_start = clock(), enemy_time_end;
 	int nEnemyNum = 0;
 
-	/*
-		All mission completed.
-	*/
-	if (nMission == 4)
-	{
-		WriteChar(MAP_LEN / 2, 6, "Congratulation !", COLOR_TEXT);
-		_getch();
-		return;
-	}
+	
 
 	/*
 	Load this mission's map.
 	*/
-	if (LoadMap(nMission)) return;
+	if (nMission >= 0)
+	{
+		/*
+		All mission completed.
+		*/
+		if (nMission == 4)
+		{
+			WriteChar(MAP_LEN / 2, 6, "Congratulation !", COLOR_TEXT);
+			_getch();
+			return;
+		}
+
+		if (LoadMap(nMission)) return;
+	}
 	DisplayMap();
 
 	

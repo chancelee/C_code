@@ -31,16 +31,15 @@ int main()
 			break;
 		case CONTIN:
 			if(LoadBk(&nMission,players,enemies)) break;
-			StartGame(1, players, nPlayerNum, enemies);
+			StartGame(nMission, players, nPlayerNum, enemies);
 			break;
 		case DRAWMP:
 			DrawMap();
 			break;
 		case LOADMP:
-			//LoadMap(0);
 			SetPlayerNum(&nPlayerNum);
 			InitPlayersAndEnemies(players, nPlayerNum, enemies);
-			StartGame(-1,players,nPlayerNum,enemies);
+			StartGame(0,players,nPlayerNum,enemies);
 			break;
 		default:
 			break;
