@@ -139,7 +139,7 @@ void Fire(PTank pTank)
 void BulletMoveAndDisplay(PTank pPlayer, int nPlayerNum, PTank pEnemy, int nEnemyNum)
 {
 	/*
-		Clean and move the bullets of players.
+	Clean and move the bullets of players.
 	*/
 	for (int i = 0; i < nPlayerNum; i++)
 	{
@@ -149,14 +149,7 @@ void BulletMoveAndDisplay(PTank pPlayer, int nPlayerNum, PTank pEnemy, int nEnem
 			if (pPlayer[i].m_bullets[j].used)
 			{
 				WriteChar(pPlayer[i].m_bullets[j].m_posX, pPlayer[i].m_bullets[j].m_posY, "  ", COLOR_LAND);
-			}
-		}
 
-		//move the bullets.
-		for (int j = 0; j < BULLETSNUM_PER_TANK; j++)
-		{
-			if (pPlayer[i].m_bullets[j].used)
-			{
 				switch (pPlayer[i].m_bullets[j].m_nDirection)
 				{
 				case UP:
@@ -174,17 +167,12 @@ void BulletMoveAndDisplay(PTank pPlayer, int nPlayerNum, PTank pEnemy, int nEnem
 				default:
 					break;
 				}
+
+				WriteChar(pPlayer[i].m_bullets[j].m_posX, pPlayer[i].m_bullets[j].m_posY, "  ", pPlayer[i].m_wColor);
+
 			}
 		}
 
-		//show the new positon of bullets.
-		for (int j = 0; j < BULLETSNUM_PER_TANK; j++)
-		{
-			if (pPlayer[i].m_bullets[j].used)
-			{
-				WriteChar(pPlayer[i].m_bullets[j].m_posX, pPlayer[i].m_bullets[j].m_posY, "  ", pPlayer[i].m_wColor);
-			}
-		}
 	}
 
 	/*
@@ -192,20 +180,15 @@ void BulletMoveAndDisplay(PTank pPlayer, int nPlayerNum, PTank pEnemy, int nEnem
 	*/
 	for (int i = 0; i < nEnemyNum; i++)
 	{
-		//clean the old bullets.
-		for (int j = 0; j < BULLETSNUM_PER_TANK; j++)
-		{
-			if (pEnemy[i].m_bullets[j].used)
-			{
-				WriteChar(pEnemy[i].m_bullets[j].m_posX, pEnemy[i].m_bullets[j].m_posY, "  ", COLOR_LAND);
-			}
-		}
 
-		//move the bullets.
 		for (int j = 0; j < BULLETSNUM_PER_TANK; j++)
 		{
 			if (pEnemy[i].m_bullets[j].used)
 			{
+				//clean the old bullets.
+				WriteChar(pEnemy[i].m_bullets[j].m_posX, pEnemy[i].m_bullets[j].m_posY, "  ", COLOR_LAND);
+
+				//move the bullets.
 				switch (pEnemy[i].m_bullets[j].m_nDirection)
 				{
 				case UP:
@@ -223,18 +206,12 @@ void BulletMoveAndDisplay(PTank pPlayer, int nPlayerNum, PTank pEnemy, int nEnem
 				default:
 					break;
 				}
-			}
-		}
 
-		//show the new positon of bullets.
-		for (int j = 0; j < BULLETSNUM_PER_TANK; j++)
-		{
-			if (pEnemy[i].m_bullets[j].used)
-			{
+				//show the new positon of bullets.
 				WriteChar(pEnemy[i].m_bullets[j].m_posX, pEnemy[i].m_bullets[j].m_posY, "  ", pEnemy[i].m_wColor);
 			}
 		}
+
 	}
 }
-
 
