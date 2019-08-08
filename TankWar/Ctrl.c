@@ -114,6 +114,10 @@ void StartGame(int nMission,PTank pPlayer,int nPlayerNum,PTank pEnemy)
 		DisplayTank(&pPlayer[i]);
 	}
 
+	for (int i = 0; i < ENEMY_NUM; i++)
+	{
+		if (pEnemy[i].m_nHP) ++nEnemyNum;
+	}
 	
 	PlaySoundA("sound\\bgm.wav", NULL, SND_ASYNC | SND_FILENAME | SND_NODEFAULT);
 
