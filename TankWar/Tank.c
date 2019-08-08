@@ -66,7 +66,7 @@ void DisplayTank(PTank pTank)
 
 			if (g_tankShape[pTank->m_nDirection][y - pTank->m_posY][x - pTank->m_posX])
 			{
-				WriteChar(x, y, "  ", pTank->m_wColor);
+				WriteStr(x, y, "  ", pTank->m_wColor);
 			}
 		}
 	}
@@ -74,16 +74,16 @@ void DisplayTank(PTank pTank)
 	switch (pTank->m_nDirection)
 	{
 	case UP:
-		WriteChar(pTank->m_posX + 1, pTank->m_posY, BARREL, COLOR_BARREL);
+		WriteStr(pTank->m_posX + 1, pTank->m_posY, BARREL, COLOR_BARREL);
 		break;
 	case DOWN:
-		WriteChar(pTank->m_posX + 1, pTank->m_posY + 2, BARREL, COLOR_BARREL);
+		WriteStr(pTank->m_posX + 1, pTank->m_posY + 2, BARREL, COLOR_BARREL);
 		break;
 	case LEFT:
-		WriteChar(pTank->m_posX, pTank->m_posY + 1, BARREL, COLOR_BARREL);
+		WriteStr(pTank->m_posX, pTank->m_posY + 1, BARREL, COLOR_BARREL);
 		break;
 	case RIGHT:
-		WriteChar(pTank->m_posX + 2, pTank->m_posY + 1, BARREL, COLOR_BARREL);
+		WriteStr(pTank->m_posX + 2, pTank->m_posY + 1, BARREL, COLOR_BARREL);
 		break;
 	}
 }
@@ -94,7 +94,7 @@ void ClsTank(PTank pTank)
 	{
 		for (int x = pTank->m_oldPosX; x < pTank->m_oldPosX + 3; x++)
 		{
-			WriteChar(x, y, "  ", COLOR_LAND);
+			WriteStr(x, y, "  ", COLOR_LAND);
 		}
 	}
 
@@ -148,7 +148,7 @@ void BulletMoveAndDisplay(PTank pPlayer, int nPlayerNum, PTank pEnemy, int nEnem
 		{
 			if (pPlayer[i].m_bullets[j].used)
 			{
-				WriteChar(pPlayer[i].m_bullets[j].m_posX, pPlayer[i].m_bullets[j].m_posY, "  ", COLOR_LAND);
+				WriteStr(pPlayer[i].m_bullets[j].m_posX, pPlayer[i].m_bullets[j].m_posY, "  ", COLOR_LAND);
 
 				switch (pPlayer[i].m_bullets[j].m_nDirection)
 				{
@@ -168,7 +168,7 @@ void BulletMoveAndDisplay(PTank pPlayer, int nPlayerNum, PTank pEnemy, int nEnem
 					break;
 				}
 
-				WriteChar(pPlayer[i].m_bullets[j].m_posX, pPlayer[i].m_bullets[j].m_posY, "  ", pPlayer[i].m_wColor);
+				WriteStr(pPlayer[i].m_bullets[j].m_posX, pPlayer[i].m_bullets[j].m_posY, "  ", pPlayer[i].m_wColor);
 
 			}
 		}
@@ -186,7 +186,7 @@ void BulletMoveAndDisplay(PTank pPlayer, int nPlayerNum, PTank pEnemy, int nEnem
 			if (pEnemy[i].m_bullets[j].used)
 			{
 				//clean the old bullets.
-				WriteChar(pEnemy[i].m_bullets[j].m_posX, pEnemy[i].m_bullets[j].m_posY, "  ", COLOR_LAND);
+				WriteStr(pEnemy[i].m_bullets[j].m_posX, pEnemy[i].m_bullets[j].m_posY, "  ", COLOR_LAND);
 
 				//move the bullets.
 				switch (pEnemy[i].m_bullets[j].m_nDirection)
@@ -208,7 +208,7 @@ void BulletMoveAndDisplay(PTank pPlayer, int nPlayerNum, PTank pEnemy, int nEnem
 				}
 
 				//show the new positon of bullets.
-				WriteChar(pEnemy[i].m_bullets[j].m_posX, pEnemy[i].m_bullets[j].m_posY, "  ", pEnemy[i].m_wColor);
+				WriteStr(pEnemy[i].m_bullets[j].m_posX, pEnemy[i].m_bullets[j].m_posY, "  ", pEnemy[i].m_wColor);
 			}
 		}
 

@@ -67,7 +67,7 @@ void Tank::DisplayTank()
 
 			if (g_tankShape[this->m_nDirection][y - this->m_posY][x - this->m_posX])
 			{
-				WriteChar(x, y, "  ", this->m_wColor);
+				WriteStr(x, y, "  ", this->m_wColor);
 			}
 		}
 	}
@@ -75,16 +75,16 @@ void Tank::DisplayTank()
 	switch (this->m_nDirection)
 	{
 	case UP:
-		WriteChar(this->m_posX + 1, this->m_posY, BARREL, COLOR_BARREL);
+		WriteStr(this->m_posX + 1, this->m_posY, BARREL, COLOR_BARREL);
 		break;
 	case DOWN:
-		WriteChar(this->m_posX + 1, this->m_posY + 2, BARREL, COLOR_BARREL);
+		WriteStr(this->m_posX + 1, this->m_posY + 2, BARREL, COLOR_BARREL);
 		break;
 	case LEFT:
-		WriteChar(this->m_posX, this->m_posY + 1, BARREL, COLOR_BARREL);
+		WriteStr(this->m_posX, this->m_posY + 1, BARREL, COLOR_BARREL);
 		break;
 	case RIGHT:
-		WriteChar(this->m_posX + 2, this->m_posY + 1, BARREL, COLOR_BARREL);
+		WriteStr(this->m_posX + 2, this->m_posY + 1, BARREL, COLOR_BARREL);
 		break;
 	}
 }
@@ -95,7 +95,7 @@ void Tank::ClsTank()
 	{
 		for (int x = this->m_oldPosX; x < this->m_oldPosX + 3; x++)
 		{
-			WriteChar(x, y, "  ", COLOR_LAND);
+			WriteStr(x, y, "  ", COLOR_LAND);
 		}
 	}
 }
@@ -145,7 +145,7 @@ void Tank::BulletMoveAndDisplay()
 	{
 		if (this->m_bullets[i].used)
 		{
-			WriteChar(this->m_bullets[i].m_posX, this->m_bullets[i].m_posY, "  ", COLOR_LAND);
+			WriteStr(this->m_bullets[i].m_posX, this->m_bullets[i].m_posY, "  ", COLOR_LAND);
 
 			switch (this->m_bullets[i].m_nDirection)
 			{
@@ -165,7 +165,7 @@ void Tank::BulletMoveAndDisplay()
 				break;
 			}
 
-			WriteChar(this->m_bullets[i].m_posX, this->m_bullets[i].m_posY, "  ", this->m_wColor);
+			WriteStr(this->m_bullets[i].m_posX, this->m_bullets[i].m_posY, "  ", this->m_wColor);
 		}
 	}
 }

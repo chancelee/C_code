@@ -26,16 +26,16 @@ void Map::DisplayMap()
 			switch (aMap[i][j])
 			{
 			case OBSTACLE:
-				WriteChar(i, j, "  ", COLOR_OBSTACLE);
+				WriteStr(i, j, "  ", COLOR_OBSTACLE);
 				break;
 			case BLOCK:
-				WriteChar(i, j, "  ", COLOR_BLOCK);
+				WriteStr(i, j, "  ", COLOR_BLOCK);
 				break;
 			case TREE:
-				WriteChar(i, j, "  ", COLOR_TREE);
+				WriteStr(i, j, "  ", COLOR_TREE);
 				break;
 			case HEART:
-				WriteChar(i, j, "  ", COLOR_HEART);
+				WriteStr(i, j, "  ", COLOR_HEART);
 				break;
 			}
 		}
@@ -58,7 +58,7 @@ int Map::SaveMap()
 	fopen_s(&fp, szPath, "wb");
 	if (fp == NULL)
 	{
-		WriteChar(MAP_LEN / 2, WINDOW_WID / 2 - 8, "fopen_s() error\n", COLOR_TEXT);
+		WriteStr(MAP_LEN / 2, WINDOW_WID / 2 - 8, "fopen_s() error\n", COLOR_TEXT);
 		return -1;
 	}
 
@@ -103,14 +103,14 @@ int Map::DrawMap()
 
 	DisplayMap();
 
-	WriteChar(MAP_LEN + 3, 4, "block   ", COLOR_BLOCK);
-	WriteChar(MAP_LEN + 3, 6, "obstacle", COLOR_OBSTACLE);
+	WriteStr(MAP_LEN + 3, 4, "block   ", COLOR_BLOCK);
+	WriteStr(MAP_LEN + 3, 6, "obstacle", COLOR_OBSTACLE);
 
-	WriteChar(MAP_LEN, 8, "UP/DOWN to select.", COLOR_TEXT);
-	WriteChar(MAP_LEN, 10, "RIGHT BUTTON to cancel.", COLOR_TEXT);
-	WriteChar(MAP_LEN, 12, "ENTER to save.", COLOR_TEXT);
+	WriteStr(MAP_LEN, 8, "UP/DOWN to select.", COLOR_TEXT);
+	WriteStr(MAP_LEN, 10, "RIGHT BUTTON to cancel.", COLOR_TEXT);
+	WriteStr(MAP_LEN, 12, "ENTER to save.", COLOR_TEXT);
 	
-	WriteChar(MAP_LEN + 1, 4, "-->", COLOR_TEXT);
+	WriteStr(MAP_LEN + 1, 4, "-->", COLOR_TEXT);
 
 
 	SetConsoleMode(hIn, ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT);
@@ -127,7 +127,7 @@ int Map::DrawMap()
 				pos.Y > 0 &&
 				pos.Y < MAP_WID * 2)
 			{
-				WriteChar(pos.X / 2, pos.Y, "  ", (cSelected == BLOCK) ? COLOR_BLOCK : COLOR_OBSTACLE);
+				WriteStr(pos.X / 2, pos.Y, "  ", (cSelected == BLOCK) ? COLOR_BLOCK : COLOR_OBSTACLE);
 				aMap[pos.X / 2][pos.Y] = cSelected;
 			}
 			if (RIGHTMOST_BUTTON_PRESSED  == inrec.Event.MouseEvent.dwButtonState &&
@@ -136,7 +136,7 @@ int Map::DrawMap()
 				pos.Y > 0 &&
 				pos.Y < MAP_WID * 2)
 			{
-				WriteChar(pos.X / 2, pos.Y, "  ", COLOR_LAND);
+				WriteStr(pos.X / 2, pos.Y, "  ", COLOR_LAND);
 				aMap[pos.X / 2][pos.Y] = LAND;
 			}
 			break;
@@ -148,18 +148,18 @@ int Map::DrawMap()
 				case VK_UP:
 					if (cSelected == OBSTACLE)
 					{
-						WriteChar(MAP_LEN + 1, 6, "   ", COLOR_TEXT);
+						WriteStr(MAP_LEN + 1, 6, "   ", COLOR_TEXT);
 						cSelected = BLOCK;
-						WriteChar(MAP_LEN + 1, 4, "-->", COLOR_TEXT);
+						WriteStr(MAP_LEN + 1, 4, "-->", COLOR_TEXT);
 					}
 					break;
 				case VK_DOWN:
 
 					if (cSelected == BLOCK)
 					{
-						WriteChar(MAP_LEN + 1, 4, "   ", COLOR_TEXT);
+						WriteStr(MAP_LEN + 1, 4, "   ", COLOR_TEXT);
 						cSelected = OBSTACLE;
-						WriteChar(MAP_LEN + 1, 6, "-->", COLOR_TEXT);
+						WriteStr(MAP_LEN + 1, 6, "-->", COLOR_TEXT);
 					}
 					break;
 				case VK_RETURN:
@@ -176,10 +176,10 @@ int Map::DrawMap()
 
 	if (SaveMap())
 	{
-		WriteChar(MAP_LEN / 2, 4, "SaveMap() error", COLOR_TEXT);
+		WriteStr(MAP_LEN / 2, 4, "SaveMap() error", COLOR_TEXT);
 
 	}
-	WriteChar(MAP_LEN / 2, 4, "Saved successfully", COLOR_TEXT);
+	WriteStr(MAP_LEN / 2, 4, "Saved successfully", COLOR_TEXT);
 
 	Sleep(1000);
 	SetConsoleTextAttribute(hOut, COLOR_LAND);
@@ -217,7 +217,7 @@ int Map::LoadMap(int nMission)
 		if (fp == NULL)
 		{
 			system("cls");
-			WriteChar(MAP_LEN / 2, 5, "fopen_s() error\n", COLOR_TEXT);
+			WriteStr(MAP_LEN / 2, 5, "fopen_s() error\n", COLOR_TEXT);
 			SetConsoleTextAttribute(hOut, COLOR_LAND);
 			system("cls");
 			return -1;
@@ -230,7 +230,7 @@ int Map::LoadMap(int nMission)
 
 	strcpy_s(szPath,40,"map/*.map");
 	if ((hFile = _findfirst(szPath, &fileInfo)) == -1) {
-		WriteChar(MAP_LEN / 2, 6, "No map", COLOR_TEXT);
+		WriteStr(MAP_LEN / 2, 6, "No map", COLOR_TEXT);
 		Sleep(1000);
 		system("cls");
 		return -1;
@@ -248,12 +248,12 @@ int Map::LoadMap(int nMission)
 	/*
 		Select a map listed.
 	*/
-	WriteChar(MAP_LEN / 2 - 1, 4, "Choose a map (only 5 maps are displayed):", COLOR_TEXT);
+	WriteStr(MAP_LEN / 2 - 1, 4, "Choose a map (only 5 maps are displayed):", COLOR_TEXT);
 	for (int i = 0; i < nFileNum; i++)
 	{
-		WriteChar(MAP_LEN / 2, 6 + i * 2, szfileNames[i], COLOR_TEXT);
+		WriteStr(MAP_LEN / 2, 6 + i * 2, szfileNames[i], COLOR_TEXT);
 	}
-	WriteChar(MAP_LEN / 2 - 4, 6, "-->", COLOR_TEXT);
+	WriteStr(MAP_LEN / 2 - 4, 6, "-->", COLOR_TEXT);
 
 	while (!bSelected)
 	{
@@ -265,18 +265,18 @@ int Map::LoadMap(int nMission)
 			case VK_UP:
 				if (nSelected > 0)
 				{
-					WriteChar(MAP_LEN / 2 - 4, 6 + nSelected * 2, "   ", COLOR_TEXT);
+					WriteStr(MAP_LEN / 2 - 4, 6 + nSelected * 2, "   ", COLOR_TEXT);
 					--nSelected;
-					WriteChar(MAP_LEN / 2 - 4, 6 + nSelected * 2, "-->", COLOR_TEXT);
+					WriteStr(MAP_LEN / 2 - 4, 6 + nSelected * 2, "-->", COLOR_TEXT);
 				}
 				break;
 			case VK_DOWN:
 
 				if (nSelected < nFileNum - 1)
 				{
-					WriteChar(MAP_LEN / 2 - 4, 6 + nSelected * 2, "   ", COLOR_TEXT);
+					WriteStr(MAP_LEN / 2 - 4, 6 + nSelected * 2, "   ", COLOR_TEXT);
 					++nSelected;
-					WriteChar(MAP_LEN / 2 - 4, 6 + nSelected * 2, "-->", COLOR_TEXT);
+					WriteStr(MAP_LEN / 2 - 4, 6 + nSelected * 2, "-->", COLOR_TEXT);
 				}
 				break;
 			case VK_RETURN:
@@ -298,7 +298,7 @@ int Map::LoadMap(int nMission)
 	{
 		SetConsoleTextAttribute(hOut, COLOR_LAND);
 		system("cls");
-		WriteChar(MAP_LEN / 2 , 5, "fopen_s() error\n", COLOR_TEXT);
+		WriteStr(MAP_LEN / 2 , 5, "fopen_s() error\n", COLOR_TEXT);
 		system("cls");
 		return -1;
 	}

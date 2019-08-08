@@ -21,8 +21,8 @@ void Game::SetPlayerNum()
 	
 	this->m_nPlayerNum = 1;
 	
-	WriteChar(x, y, "1 player", COLOR_TEXT_SELECTED);
-	WriteChar(x, y + 2, "2 players", COLOR_TEXT);
+	WriteStr(x, y, "1 player", COLOR_TEXT_SELECTED);
+	WriteStr(x, y + 2, "2 players", COLOR_TEXT);
 	while (!bSelected)
 	{
 		ReadConsoleInput(hIn, &keyrec, 1, &res);
@@ -34,9 +34,9 @@ void Game::SetPlayerNum()
 			case VK_UP:
 				if (this->m_nPlayerNum == 2)
 				{
-					WriteChar(x, y + 2, "2 players", COLOR_TEXT);
+					WriteStr(x, y + 2, "2 players", COLOR_TEXT);
 					--(this->m_nPlayerNum);
-					WriteChar(x, y, "1 player ", COLOR_TEXT_SELECTED);
+					WriteStr(x, y, "1 player ", COLOR_TEXT_SELECTED);
 
 				}
 				break;
@@ -44,9 +44,9 @@ void Game::SetPlayerNum()
 
 				if (this->m_nPlayerNum == 1)
 				{
-					WriteChar(x, y, "1 player ", COLOR_TEXT);
+					WriteStr(x, y, "1 player ", COLOR_TEXT);
 					++(this->m_nPlayerNum);
-					WriteChar(x, y + 2, "2 players", COLOR_TEXT_SELECTED);
+					WriteStr(x, y + 2, "2 players", COLOR_TEXT_SELECTED);
 				}
 				break;
 			case VK_RETURN:
@@ -101,7 +101,7 @@ void Game::StartGame(int nMission)
 		*/
 		if (m_nMission == 4)
 		{
-			WriteChar(MAP_LEN / 2, 6, "Congratulation !", COLOR_TEXT);
+			WriteStr(MAP_LEN / 2, 6, "Congratulation !", COLOR_TEXT);
 			_getch();
 			return;
 		}
@@ -126,21 +126,21 @@ void Game::StartGame(int nMission)
 	
 	PlaySoundA("sound\\bgm.wav", NULL, SND_ASYNC | SND_FILENAME | SND_NODEFAULT);
 
-	WriteChar(MAP_LEN   , 4, "player 1 ", COLOR_TEXT);
-	WriteChar(MAP_LEN   , 5, "     w/s/a/d/f", COLOR_TEXT);
-	WriteChar(MAP_LEN   , 6, " HP ", COLOR_TEXT);
+	WriteStr(MAP_LEN   , 4, "player 1 ", COLOR_TEXT);
+	WriteStr(MAP_LEN   , 5, "     w/s/a/d/f", COLOR_TEXT);
+	WriteStr(MAP_LEN   , 6, " HP ", COLOR_TEXT);
 	WriteInt(MAP_LEN + 4, 6, m_pPlayer[0]->m_nHP, COLOR_TEXT);
-	WriteChar(MAP_LEN   , 7, " score: ", COLOR_TEXT);
+	WriteStr(MAP_LEN   , 7, " score: ", COLOR_TEXT);
 	WriteInt(MAP_LEN + 4, 7, m_pPlayer[0]->m_nKill, COLOR_TEXT);
 
-	WriteChar(MAP_LEN   , 9, "player 2 ", COLOR_TEXT);
-	WriteChar(MAP_LEN   , 10, "     i/k/j/l/h", COLOR_TEXT);
-	WriteChar(MAP_LEN   , 11, " HP   : ", COLOR_TEXT);
+	WriteStr(MAP_LEN   , 9, "player 2 ", COLOR_TEXT);
+	WriteStr(MAP_LEN   , 10, "     i/k/j/l/h", COLOR_TEXT);
+	WriteStr(MAP_LEN   , 11, " HP   : ", COLOR_TEXT);
 	WriteInt(MAP_LEN + 4, 11, m_pPlayer[1]->m_nHP, COLOR_TEXT);
-	WriteChar(MAP_LEN   , 12, " score: ", COLOR_TEXT);
+	WriteStr(MAP_LEN   , 12, " score: ", COLOR_TEXT);
 	WriteInt(MAP_LEN + 4, 12, m_pPlayer[1]->m_nKill, COLOR_TEXT);
 	
-	WriteChar(MAP_LEN + 4, 14, "B to save", COLOR_TEXT);
+	WriteStr(MAP_LEN + 4, 14, "B to save", COLOR_TEXT);
 
 	srand((unsigned int)time(0));
 	/*
@@ -188,9 +188,9 @@ void Game::StartGame(int nMission)
 			case 'b':
 				if (!SaveBk())
 				{
-					WriteChar(MAP_LEN, 16, "Backup saved", COLOR_TEXT);
+					WriteStr(MAP_LEN, 16, "Backup saved", COLOR_TEXT);
 					Sleep(1500);
-					WriteChar(MAP_LEN, 16, "            ", COLOR_LAND);
+					WriteStr(MAP_LEN, 16, "            ", COLOR_LAND);
 				}
 			default:
 				break;
@@ -289,7 +289,7 @@ void Game::StartGame(int nMission)
 
 	if ( (m_pPlayer[0]->m_nKill + m_pPlayer[1]->m_nKill) == ENEMY_NUM)
 	{
-		WriteChar(MAP_LEN / 2, MAP_WID / 2, "MISSION COMPLETED!", COLOR_TEXT);
+		WriteStr(MAP_LEN / 2, MAP_WID / 2, "MISSION COMPLETED!", COLOR_TEXT);
 
 		_getch();
 
@@ -309,8 +309,8 @@ void Game::StartGame(int nMission)
 	}
 	else
 	{
-		WriteChar(MAP_LEN / 2, MAP_WID / 2, "GAGE OVER", COLOR_TEXT);
-		WriteChar(MAP_LEN / 2, MAP_WID / 2 + 1, "Press any key to return.", COLOR_TEXT);
+		WriteStr(MAP_LEN / 2, MAP_WID / 2, "GAGE OVER", COLOR_TEXT);
+		WriteStr(MAP_LEN / 2, MAP_WID / 2 + 1, "Press any key to return.", COLOR_TEXT);
 		_getch();
 		SetConsoleTextAttribute(hOut, COLOR_LAND);
 		system("cls");
@@ -446,12 +446,12 @@ void Game::BulletCollisionCheck()
 					break;
 				case OBSTACLE:
 					m_pPlayer[i]->m_bullets[j].used = 0;
-					WriteChar(m_pPlayer[i]->m_bullets[j].m_posX, m_pPlayer[i]->m_bullets[j].m_posY, "  ", COLOR_OBSTACLE);
+					WriteStr(m_pPlayer[i]->m_bullets[j].m_posX, m_pPlayer[i]->m_bullets[j].m_posY, "  ", COLOR_OBSTACLE);
 					break;
 				case BLOCK:
 					m_map.aMap[m_pPlayer[i]->m_bullets[j].m_posX][m_pPlayer[i]->m_bullets[j].m_posY] = LAND;
 					m_pPlayer[i]->m_bullets[j].used = 0;
-					WriteChar(m_pPlayer[i]->m_bullets[j].m_posX, m_pPlayer[i]->m_bullets[j].m_posY, "  ", COLOR_LAND);
+					WriteStr(m_pPlayer[i]->m_bullets[j].m_posX, m_pPlayer[i]->m_bullets[j].m_posY, "  ", COLOR_LAND);
 					break;
 
 				default:
@@ -503,12 +503,12 @@ void Game::BulletCollisionCheck()
 					break;
 				case OBSTACLE:
 					m_pEnemy[i]->m_bullets[j].used = 0;
-					WriteChar(m_pEnemy[i]->m_bullets[j].m_posX, m_pEnemy[i]->m_bullets[j].m_posY, "  ", COLOR_OBSTACLE);
+					WriteStr(m_pEnemy[i]->m_bullets[j].m_posX, m_pEnemy[i]->m_bullets[j].m_posY, "  ", COLOR_OBSTACLE);
 					break;
 				case BLOCK:
 					m_map.aMap[m_pEnemy[i]->m_bullets[j].m_posX][m_pEnemy[i]->m_bullets[j].m_posY] = LAND;
 					m_pEnemy[i]->m_bullets[j].used = 0;
-					WriteChar(m_pEnemy[i]->m_bullets[j].m_posX, m_pEnemy[i]->m_bullets[j].m_posY, "  ", COLOR_LAND);
+					WriteStr(m_pEnemy[i]->m_bullets[j].m_posX, m_pEnemy[i]->m_bullets[j].m_posY, "  ", COLOR_LAND);
 					break;
 				default:
 					break;
@@ -564,7 +564,7 @@ int Game::SaveBk()
 	fopen_s(&fp, szPath, "wb");
 	if (fp == NULL)
 	{
-		WriteChar(MAP_LEN / 2, WINDOW_WID / 2 - 8, "fopen_s() error\n", COLOR_TEXT);
+		WriteStr(MAP_LEN / 2, WINDOW_WID / 2 - 8, "fopen_s() error\n", COLOR_TEXT);
 		return -1;
 	}
 
@@ -598,7 +598,7 @@ int Game::LoadBk()
 
 	strcpy_s(szPath, 40, "backup/*.bk");
 	if ((hFile = _findfirst(szPath, &fileInfo)) == -1) {
-		WriteChar(30, 10, "No map", COLOR_TEXT);
+		WriteStr(30, 10, "No map", COLOR_TEXT);
 		Sleep(1000);
 		system("cls");
 		return -1;
@@ -612,12 +612,12 @@ int Game::LoadBk()
 		++nFileNum;
 	} while (_findnext(hFile, &fileInfo) == 0 && nFileNum < MAP_NUM);
 
-	WriteChar(MAP_LEN / 2 - 1, 4, "Choose a backup (only 5 backups are displayed):", COLOR_TEXT);
+	WriteStr(MAP_LEN / 2 - 1, 4, "Choose a backup (only 5 backups are displayed):", COLOR_TEXT);
 	for (int i = 0; i < nFileNum; i++)
 	{
-		WriteChar(MAP_LEN / 2, 6 + i * 2, szfileNames[i], COLOR_TEXT);
+		WriteStr(MAP_LEN / 2, 6 + i * 2, szfileNames[i], COLOR_TEXT);
 	}
-	WriteChar(MAP_LEN / 2 - 4, 6, "-->", COLOR_TEXT);
+	WriteStr(MAP_LEN / 2 - 4, 6, "-->", COLOR_TEXT);
 
 	while (!bSelected)
 	{
@@ -629,18 +629,18 @@ int Game::LoadBk()
 			case VK_UP:
 				if (nSelected > 0)
 				{
-					WriteChar(MAP_LEN / 2 - 4, 6 + nSelected * 2, "   ", COLOR_TEXT);
+					WriteStr(MAP_LEN / 2 - 4, 6 + nSelected * 2, "   ", COLOR_TEXT);
 					--nSelected;
-					WriteChar(MAP_LEN / 2 - 4, 6 + nSelected * 2, "-->", COLOR_TEXT);
+					WriteStr(MAP_LEN / 2 - 4, 6 + nSelected * 2, "-->", COLOR_TEXT);
 				}
 				break;
 			case VK_DOWN:
 
 				if (nSelected < nFileNum - 1)
 				{
-					WriteChar(MAP_LEN / 2 - 4, 6 + nSelected * 2, "   ", COLOR_TEXT);
+					WriteStr(MAP_LEN / 2 - 4, 6 + nSelected * 2, "   ", COLOR_TEXT);
 					++nSelected;
-					WriteChar(MAP_LEN / 2 - 4, 6 + nSelected * 2, "-->", COLOR_TEXT);
+					WriteStr(MAP_LEN / 2 - 4, 6 + nSelected * 2, "-->", COLOR_TEXT);
 				}
 				break;
 			case VK_RETURN:
@@ -662,7 +662,7 @@ int Game::LoadBk()
 	{
 		SetConsoleTextAttribute(hOut, COLOR_LAND);
 		system("cls");
-		WriteChar(MAP_LEN / 2, 5, "fopen_s() error\n", COLOR_TEXT);
+		WriteStr(MAP_LEN / 2, 5, "fopen_s() error\n", COLOR_TEXT);
 		system("cls");
 		return -1;
 	}

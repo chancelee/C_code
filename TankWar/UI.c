@@ -1,10 +1,12 @@
 #include "UI.h"
 
+
+
 /*
 	Write strings and numbers on the screen.
 	The wAttr parameters are provided in Attr.h and Tank.h.
 */
-void WriteChar(int x, int y, char *pStr, WORD wAttr)
+void WriteStr(int x, int y, char *pStr, WORD wAttr)
 {
 	CONSOLE_CURSOR_INFO cci = { 1,FALSE };
 	COORD pos = { x * 2, y };
@@ -78,11 +80,11 @@ void WelcomeAndOption(char *pChoice)
 
 	*pChoice = START;
 
-	WriteChar(4,y,pTankPic,COLOR_TEXT);
-	WriteChar(x, y   ,  szOptions[1], COLOR_TEXT_SELECTED);
-	WriteChar(x, y + 2, szOptions[2], COLOR_TEXT);
-	WriteChar(x, y + 4, szOptions[3], COLOR_TEXT);
-	WriteChar(x, y + 6, szOptions[4], COLOR_TEXT);
+	WriteStr(4,y,pTankPic,COLOR_TEXT);
+	WriteStr(x, y   ,  szOptions[1], COLOR_TEXT_SELECTED);
+	WriteStr(x, y + 2, szOptions[2], COLOR_TEXT);
+	WriteStr(x, y + 4, szOptions[3], COLOR_TEXT);
+	WriteStr(x, y + 6, szOptions[4], COLOR_TEXT);
 
 	while (!bSelected)
 	{
@@ -95,18 +97,18 @@ void WelcomeAndOption(char *pChoice)
 			case VK_UP:
 				if (*pChoice > 1)
 				{
-					WriteChar(x, y + 2 * (*pChoice - 1), szOptions[*pChoice], COLOR_TEXT);
+					WriteStr(x, y + 2 * (*pChoice - 1), szOptions[*pChoice], COLOR_TEXT);
 					--*pChoice;
-					WriteChar(x, y + 2 * (*pChoice - 1), szOptions[*pChoice], COLOR_TEXT_SELECTED);
+					WriteStr(x, y + 2 * (*pChoice - 1), szOptions[*pChoice], COLOR_TEXT_SELECTED);
 				}
 				break;
 			case VK_DOWN:
 
 				if (*pChoice < 4)
 				{
-					WriteChar(x, y + 2 * (*pChoice - 1), szOptions[*pChoice], COLOR_TEXT);
+					WriteStr(x, y + 2 * (*pChoice - 1), szOptions[*pChoice], COLOR_TEXT);
 					++*pChoice;
-					WriteChar(x, y + 2 * (*pChoice - 1), szOptions[*pChoice], COLOR_TEXT_SELECTED);
+					WriteStr(x, y + 2 * (*pChoice - 1), szOptions[*pChoice], COLOR_TEXT_SELECTED);
 				}
 				break;
 			case VK_RETURN:
