@@ -122,7 +122,10 @@ void Game::StartGame(int nMission)
 		MarkTank(m_pPlayer[i],i);
 		m_pPlayer[i]->DisplayTank();
 	}
-
+	for (int i = 0; i < ENEMY_NUM; ++i)
+	{
+		if (m_pEnemy[i]->m_nHP) ++nEnemyNum;
+	}
 	
 	PlaySoundA("sound\\bgm.wav", NULL, SND_ASYNC | SND_FILENAME | SND_NODEFAULT);
 
