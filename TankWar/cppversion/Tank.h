@@ -81,36 +81,35 @@ public:
 
 	Bullet m_bullets[BULLETSNUM_PER_TANK];
 public:
+	/*
+		Constructor of tank.
+		bIsPlayer : PLAYER or ENEMY.
+	*/
 	Tank(BOOL bIsPlayer, int nPosX, int nPosY, int nDirection, WORD wAttr);
+	void InitTank(int nPosX, int nPosY, int nDirection);
+
+	/*
+		Display and Clean one tank on the screen.
+	*/
 	void DisplayTank();
 	void ClsTank();
+
+	/*
+		Activate the tank's unused bullet, and set the bullet's direction and positions.
+	*/
 	void Fire();
+
+	/*
+		This function should be called after bullet collision check.
+		Every player and enemy's bullets will be checked in this function, if any bullet is used, its old position will cleaned , then its new position will be displayed.
+	*/
 	void BulletMoveAndDisplay();
 };
 
 typedef Tank *PTank;
 
-//
-///*
-//	Constructor of tank.
-//	bIsPlayer : PLAYER or ENEMY.
-//*/
-//void InitTank(PTank pTank,BOOL bIsPlayer, int nPosX, int nPosY, int nDirection, WORD wAttr);
-//
-///*
-//	Display and Clean one tank on the screen.
-//*/
-//void DisplayTank(PTank pTank);
-//void ClsTank(PTank pTank);
-//
-///*
-//	Activate the tank's unused bullet, and set the bullet's direction and positions.
-//*/
-//void Fire(PTank pTank);
-//
-///*
-//	This function should be called after bullet collision check.
-//	Every player and enemy's bullets will be checked in this function, if any bullet is used, its old position will cleaned , then its new position will be displayed.
-//*/
-//void BulletMoveAndDisplay(PTank pTank, int nPlayerNum, PTank pEnemy, int nEnemyNum);
-//
+
+
+
+
+

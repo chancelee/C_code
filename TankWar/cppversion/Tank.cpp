@@ -33,28 +33,37 @@ char g_tankShape[4][3][3] =
 Tank::Tank(BOOL bIsPlayer, int nPosX, int nPosY, int nDirection, WORD wAttr)
 {
 	this->m_bIsPlayer = bIsPlayer;
-	this->m_posX = nPosX;
-	this->m_posY = nPosY;
+	this->m_wColor = wAttr;
 
-	this->m_oldPosX = nPosX;
-	this->m_oldPosY = nPosY;
+	InitTank(nPosX, nPosY, nDirection);
 
-	if (bIsPlayer)
+	memset((void*)(this->m_bullets), 0, sizeof(Bullet) * BULLETSNUM_PER_TANK);
+}
+
+void Tank::InitTank(int nPosX, int nPosY, int nDirection)
+{
+	m_posX = nPosX;
+	m_posY = nPosY;
+
+	m_oldPosX = nPosX;
+	m_oldPosY = nPosY;
+
+	if (m_bIsPlayer)
 	{
-		this->m_nHP = 3;
+		m_nHP = 3;
 	}
 	else
 	{
-		this->m_nHP = 0;
+		m_nHP = 0;
 	}
 
-	this->m_nDirection = nDirection;
+	m_nDirection = nDirection;
+	m_nKill = 0;
 
-	this->m_nKill = 0;
-
-	this->m_wColor = wAttr;
-
-	memset((void*)(this->m_bullets), 0, sizeof(Bullet) * BULLETSNUM_PER_TANK);
+	for (int i = 0; i < BULLETSNUM_PER_TANK; ++i)
+	{
+		m_bullets[i].used = 0;
+	}
 }
 
 

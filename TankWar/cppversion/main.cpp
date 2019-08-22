@@ -23,8 +23,8 @@ int main()
 		{
 		case START:
 			game.SetPlayerNum();
-			game.InitPlayersAndEnemies();
 			game.m_nMission = 1;
+			game.InitPlayerAndEnemy();
 			game.StartGame(game.m_nMission);
 			break;
 		case CONTIN:
@@ -36,7 +36,7 @@ int main()
 			break;
 		case LOADMP:
 			game.SetPlayerNum();
-			game.InitPlayersAndEnemies();
+			game.InitPlayerAndEnemy();
 			game.StartGame(0);
 			break;
 		default:
@@ -44,7 +44,7 @@ int main()
 		}
 		system("cls");
 	}
-
+	
 	SetConsoleTextAttribute(hOut,csbi.wAttributes);
 	return 0;
 }

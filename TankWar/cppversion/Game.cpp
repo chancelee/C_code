@@ -4,9 +4,36 @@
 
 Game::Game()
 {
-	
+	m_pPlayer[0] = new Tank(TRUE, m_map.nPlayerBeginPosX[0], m_map.nPlayerBeginPosY, UP, COLOR_PLAYER1);
+	m_pPlayer[1] = new Tank(TRUE, m_map.nPlayerBeginPosX[1], m_map.nPlayerBeginPosY, UP, COLOR_PLAYER2);
+	if (m_nPlayerNum == 1)
+	{
+		memset(m_pPlayer[1], 0, sizeof(Tank));
+	}
+
+
+	for (int i = 0; i < ENEMY_NUM; i++)
+	{
+		m_pEnemy[i] = new Tank(FALSE, m_map.nEnemyBeginPosX[i % 3], m_map.nEnemyBeginPosY, DOWN, COLOR_ENEMY);
+	}
+
 	m_nPlayerNum = 1;
+	m_nEnemyNum = 0;
 	m_nMission = 1;
+}
+
+Game::~Game()
+{
+	delete[] m_pPlayer;
+	m_pPlayer[0] = nullptr;
+	m_pPlayer[1] = nullptr;
+
+	delete[] m_pEnemy;
+	for (int i = 0; i < ENEMY_NUM; i++)
+	{
+		m_pEnemy[i] = nullptr;
+	}
+
 }
 
 void Game::SetPlayerNum()
@@ -18,9 +45,9 @@ void Game::SetPlayerNum()
 	DWORD res = 0;
 	int x = WINDOW_LEN / 6, y = WINDOW_WID / 2 - 8;
 
-	
+
 	this->m_nPlayerNum = 1;
-	
+
 	WriteStr(x, y, "1 player", COLOR_TEXT_SELECTED);
 	WriteStr(x, y + 2, "2 players", COLOR_TEXT);
 	while (!bSelected)
@@ -61,22 +88,19 @@ void Game::SetPlayerNum()
 	system("cls");
 }
 
-void Game::InitPlayersAndEnemies()
+void Game::InitPlayerAndEnemy()
 {
-	
-	m_pPlayer[0] = new Tank(TRUE, m_map.nPlayerBeginPosX[0], m_map.nPlayerBeginPosY, UP, COLOR_PLAYER1);
-	m_pPlayer[1] = new Tank(TRUE, m_map.nPlayerBeginPosX[1], m_map.nPlayerBeginPosY, UP, COLOR_PLAYER2);
-	if (m_nPlayerNum == 1)
+	for (int i = 0; i < 2; ++i)
 	{
-		memset(m_pPlayer[1],0,sizeof(Tank));
+		m_pPlayer[i]->InitTank(m_map.nPlayerBeginPosX[0], m_map.nPlayerBeginPosY, UP);
 	}
-	
-
-	for (int i = 0; i < ENEMY_NUM; i++)
+	for (int i = 0; i < ENEMY_NUM; ++i)
 	{
-		m_pEnemy[i] = new Tank(FALSE, m_map.nEnemyBeginPosX[i % 3], m_map.nEnemyBeginPosY, DOWN, COLOR_ENEMY);
+		m_pEnemy[i]->InitTank(m_map.nEnemyBeginPosX[i % 3], m_map.nEnemyBeginPosY, DOWN);
 	}
+	m_nEnemyNum = 0;
 }
+
 
 void Game::StartGame(int nMission)
 {
@@ -89,7 +113,6 @@ void Game::StartGame(int nMission)
 	clock_t bullet_time_start = clock();
 	clock_t tank_time_end, bullet_time_end;
 	clock_t enemy_time_start = clock(), enemy_time_end;
-	int nEnemyNum = 0;
 
 
 	if (nMission >= 0)
@@ -124,7 +147,7 @@ void Game::StartGame(int nMission)
 	}
 	for (int i = 0; i < ENEMY_NUM; ++i)
 	{
-		if (m_pEnemy[i]->m_nHP) ++nEnemyNum;
+		if (m_pEnemy[i]->m_nHP) ++m_nEnemyNum;
 	}
 	
 	PlaySoundA("sound\\bgm.wav", NULL, SND_ASYNC | SND_FILENAME | SND_NODEFAULT);
@@ -150,7 +173,7 @@ void Game::StartGame(int nMission)
 		Begin the main loop.
 	*/
 	while ( (m_pPlayer[0]->m_nHP || m_pPlayer[1]->m_nHP)
-		&& (m_map.aMap[MAP_LEN / 2][MAP_WID - 3] == HEART)
+		&& (m_map.aMap[HEART_X][HEART_Y] == HEART)
 		&& (m_pPlayer[0]->m_nKill + m_pPlayer[1]->m_nKill) < ENEMY_NUM)
 	{
 		if (_kbhit())
@@ -273,22 +296,26 @@ void Game::StartGame(int nMission)
 			{
 				m_pEnemy[i]->BulletMoveAndDisplay();
 			}
+
+			
 		}
 
 		// The enemies should show one by one every 3 seconds.
-		if (nEnemyNum < ENEMY_NUM)
+		if (m_nEnemyNum < ENEMY_NUM)
 		{
 			enemy_time_end = clock();
 			if ((enemy_time_end - enemy_time_start) % 3000 == 0) {
-				m_pEnemy[nEnemyNum]->m_nHP = 1;
-				MarkTank(m_pEnemy[nEnemyNum], nEnemyNum);
-				m_pEnemy[nEnemyNum]->DisplayTank();
-				++nEnemyNum;
+				m_pEnemy[m_nEnemyNum]->m_nHP = 1;
+				MarkTank(m_pEnemy[m_nEnemyNum], m_nEnemyNum);
+				m_pEnemy[m_nEnemyNum]->DisplayTank();
+				++m_nEnemyNum;
 			}
 
 		}
 
 	}
+
+	m_nEnemyNum = 0;
 
 	if ( (m_pPlayer[0]->m_nKill + m_pPlayer[1]->m_nKill) == ENEMY_NUM)
 	{
@@ -300,7 +327,7 @@ void Game::StartGame(int nMission)
 		system("cls");
 		if (m_nMission > 0)
 		{
-			InitPlayersAndEnemies();
+			InitPlayerAndEnemy();
 			StartGame(m_nMission + 1);
 		}
 		else
@@ -312,6 +339,8 @@ void Game::StartGame(int nMission)
 	}
 	else
 	{
+		m_map.aMap[HEART_X][HEART_Y] = HEART;
+
 		WriteStr(MAP_LEN / 2, MAP_WID / 2, "GAGE OVER", COLOR_TEXT);
 		WriteStr(MAP_LEN / 2, MAP_WID / 2 + 1, "Press any key to return.", COLOR_TEXT);
 		_getch();
@@ -560,7 +589,7 @@ int Game::SaveBk()
 
 	time(&t);
 	localtime_s(&lt, &t);
-	sprintf_s(szPath, 40, "backup\\%d_%02d_%02d_%02d_%02d_%02d.bk", lt.tm_year + 1900, lt.tm_mon, lt.tm_mday, lt.tm_hour, lt.tm_min, lt.tm_sec);
+	sprintf_s(szPath, 40, "backup\\%d_%02d_%02d_%02d_%02d_%02d.bk", lt.tm_year + 1900, lt.tm_mon + 1, lt.tm_mday, lt.tm_hour, lt.tm_min, lt.tm_sec);
 
 	system("mkdir backup 2>nul");
 
@@ -573,8 +602,13 @@ int Game::SaveBk()
 
 	fwrite(m_map.aMap, 1, sizeof(m_map.aMap), fp);
 	fwrite(&m_nMission, sizeof(m_nMission), 1, fp);
-	fwrite(m_pPlayer, sizeof(Tank), 2, fp);
-	fwrite(m_pEnemy, sizeof(Tank), ENEMY_NUM, fp);
+	fwrite(m_pPlayer[0], sizeof(Tank), 1, fp);
+	fwrite(m_pPlayer[1], sizeof(Tank), 1, fp);
+	fwrite(&m_nEnemyNum, sizeof(m_nEnemyNum), 1, fp);
+	for (int i = 0; i < ENEMY_NUM; ++i)
+	{
+		fwrite(m_pEnemy[i], sizeof(Tank), 1, fp);
+	}
 
 
 	fclose(fp);
@@ -601,7 +635,7 @@ int Game::LoadBk()
 
 	strcpy_s(szPath, 40, "backup/*.bk");
 	if ((hFile = _findfirst(szPath, &fileInfo)) == -1) {
-		WriteStr(30, 10, "No map", COLOR_TEXT);
+		WriteStr(30, 10, "No backup", COLOR_TEXT);
 		Sleep(1000);
 		system("cls");
 		return -1;
@@ -672,8 +706,13 @@ int Game::LoadBk()
 
 	fread(m_map.aMap, 1, sizeof(m_map.aMap), fp);
 	fread(&m_nMission, sizeof(m_nMission), 1, fp);
-	fread(m_pPlayer, sizeof(Tank), 2, fp);
-	fread(m_pEnemy, sizeof(Tank), ENEMY_NUM, fp);
+	fread(m_pPlayer[0], sizeof(Tank), 1, fp);
+	fread(m_pPlayer[1], sizeof(Tank), 1, fp);
+	fread(&m_nEnemyNum, sizeof(m_nEnemyNum), 1, fp);
+	for (int i = 0; i < ENEMY_NUM; ++i)
+	{
+		fread(m_pEnemy[i], sizeof(Tank), 1, fp);
+	}
 
 
 	for (int i = 0; i < nFileNum; i++)

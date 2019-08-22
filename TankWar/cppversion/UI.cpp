@@ -55,6 +55,13 @@ void InitWindow()
 
 	SetConsoleCursorInfo(hOut, &cci);
 
+	SetWindowLongPtrA(
+		GetConsoleWindow(),
+		GWL_STYLE,
+		GetWindowLongPtrA(GetConsoleWindow(), GWL_STYLE)
+		& ~WS_SIZEBOX & ~WS_MAXIMIZEBOX & ~WS_MINIMIZEBOX
+	);
+
 	system("color 80");
 
 }

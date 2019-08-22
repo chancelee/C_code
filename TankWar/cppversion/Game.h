@@ -17,26 +17,33 @@ public:
 	Map m_map;
 	PTank m_pPlayer[2];
 	PTank m_pEnemy[ENEMY_NUM];
-	int m_nPlayerNum, m_nMission;
+	int m_nPlayerNum, m_nEnemyNum;
+	int m_nMission;
+
 public:
 	Game();
-
+	~Game();
 
 	/*
 	Init the players and enemies after the number of players is set.
 	*/
 	void SetPlayerNum();
-	void InitPlayersAndEnemies();
+	
+	void InitPlayerAndEnemy();
 
 	/*
-	Game procedure:
-	1. Check whether all missions are completed.
-	2. Load and display the mission or player-designed map.
-	3. Display player's tank.
-	4. Enter the main loop.
-	Conditions: players are alive, heart not destroyed and any enemy alive.
-	5. If players win, enter next mission or return (nMission < 1).
-	Else, lose and return.
+		Param:
+			0 : Load map
+			>0: Load mission
+			<0: Loaded backup
+		Game procedure:
+		1. Check whether all missions are completed.
+		2. Load and display the mission or player-designed map.
+		3. Display player's tank.
+		4. Enter the main loop.
+		Conditions: players are alive, heart not destroyed and any enemy alive.
+		5. If players win, enter next mission or return (nMission < 1).
+		Else, lose and return.
 
 	*/
 	void StartGame(int nMission);

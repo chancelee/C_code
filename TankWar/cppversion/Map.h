@@ -16,7 +16,8 @@
 */
 #define MAP_NUM		5
 
-
+#define HEART_X	(MAP_LEN / 2)
+#define HEART_Y	(MAP_WID - 3)
 
 
 class Map

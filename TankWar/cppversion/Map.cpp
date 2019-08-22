@@ -53,7 +53,7 @@ int Map::SaveMap()
 
 	time(&t);
 	localtime_s(&lt, &t);
-	sprintf_s(szPath, 40, "map\\%d_%02d_%02d_%02d_%02d_%02d.map", lt.tm_year + 1900, lt.tm_mon, lt.tm_mday, lt.tm_hour, lt.tm_min, lt.tm_sec);
+	sprintf_s(szPath, 40, "map\\%d_%02d_%02d_%02d_%02d_%02d.map", lt.tm_year + 1900, lt.tm_mon + 1, lt.tm_mday, lt.tm_hour, lt.tm_min, lt.tm_sec);
 
 	fopen_s(&fp, szPath, "wb");
 	if (fp == NULL)
@@ -91,14 +91,14 @@ int Map::DrawMap()
 		aMap[i][MAP_WID - 1] = OBSTACLE;
 	}
 	memset(&aMap[MAP_LEN - 1], OBSTACLE, MAP_WID);
-	aMap[MAP_LEN / 2 - 1][MAP_WID - 2] = BLOCK;
-	aMap[MAP_LEN / 2 - 1][MAP_WID - 3] = BLOCK;
-	aMap[MAP_LEN / 2 - 1][MAP_WID - 4] = BLOCK;
-	aMap[MAP_LEN / 2][MAP_WID - 4] = BLOCK;
-	aMap[MAP_LEN / 2 + 1][MAP_WID - 4] = BLOCK;
-	aMap[MAP_LEN / 2 + 1][MAP_WID - 3] = BLOCK;
-	aMap[MAP_LEN / 2 + 1][MAP_WID - 2] = BLOCK;
-	aMap[MAP_LEN / 2][MAP_WID - 3] = HEART;
+	aMap[HEART_X - 1][HEART_Y + 1] = BLOCK;
+	aMap[HEART_X - 1][HEART_Y] = BLOCK;
+	aMap[HEART_X - 1][HEART_Y - 1] = BLOCK;
+	aMap[HEART_X]	[HEART_Y - 1] = BLOCK;
+	aMap[HEART_X + 1][HEART_Y - 1] = BLOCK;
+	aMap[HEART_X + 1][HEART_Y] = BLOCK;
+	aMap[HEART_X + 1][HEART_Y + 1] = BLOCK;
+	aMap[HEART_X]	[HEART_Y] = HEART;
 
 
 	DisplayMap();
