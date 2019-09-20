@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="RegAndLogin">
+      <UniqueIdentifier>{3408785c-3d3e-489e-b742-c6ac2d1a0f5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Client">
+      <UniqueIdentifier>{7604e9ff-752d-4073-b855-739e43eba72d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FriendDlg">
+      <UniqueIdentifier>{6ed54296-2787-482a-8598-a53f161944a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GroupDlg">
+      <UniqueIdentifier>{0ec9e748-f066-402e-9d3e-1935c25f5a58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainDlg">
+      <UniqueIdentifier>{dbd40047-c5a4-4df4-bbda-78eacc3cc873}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ChatDlg">
+      <UniqueIdentifier>{a2ffc114-0ff9-4ae0-b8b6-590ef3287216}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AddDlg">
+      <UniqueIdentifier>{3cc9e681-51be-40ee-b573-8f455630fc08}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Chat.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="LogDlg.h">
+      <Filter>RegAndLogin</Filter>
+    </ClInclude>
+    <ClInclude Include="Client.h">
+      <Filter>Client</Filter>
+    </ClInclude>
+    <ClInclude Include="AddDlg.h">
+      <Filter>AddDlg</Filter>
+    </ClInclude>
+    <ClInclude Include="GroupDlg.h">
+      <Filter>GroupDlg</Filter>
+    </ClInclude>
+    <ClInclude Include="FriendDlg.h">
+      <Filter>FriendDlg</Filter>
+    </ClInclude>
+    <ClInclude Include="MainDlg.h">
+      <Filter>MainDlg</Filter>
+    </ClInclude>
+    <ClInclude Include="ChatDlg.h">
+      <Filter>ChatDlg</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Chat.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="LogDlg.cpp">
+      <Filter>RegAndLogin</Filter>
+    </ClCompile>
+    <ClCompile Include="Client.cpp">
+      <Filter>Client</Filter>
+    </ClCompile>
+    <ClCompile Include="AddDlg.cpp">
+      <Filter>AddDlg</Filter>
+    </ClCompile>
+    <ClCompile Include="FriendDlg.cpp">
+      <Filter>FriendDlg</Filter>
+    </ClCompile>
+    <ClCompile Include="GroupDlg.cpp">
+      <Filter>GroupDlg</Filter>
+    </ClCompile>
+    <ClCompile Include="MainDlg.cpp">
+      <Filter>MainDlg</Filter>
+    </ClCompile>
+    <ClCompile Include="ChatDlg.cpp">
+      <Filter>ChatDlg</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Chat.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\Chat.rc2">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\Chat.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
