@@ -7,8 +7,11 @@
 #include "keystone/keystone.h"
 
 //2. °üº¬¾²Ì¬¿â
+#ifdef _WIN64
+#pragma comment (lib,"keystone/x64/keystone_x86.lib")
+#else
 #pragma comment (lib,"keystone/x86/keystone_x86.lib")
-
+#endif // _WIN64
 
 // ´òÓ¡opcode
 void printOpcode(const unsigned char* pOpcode, int nSize)
