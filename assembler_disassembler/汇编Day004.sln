@@ -1,10 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.13
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "汇编Day004", "汇编Day004\汇编Day004.vcxproj", "{70970FB4-6F67-4BAA-BB3D-3C1023196BBB}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "反汇编引擎_beaengine", "反汇编引擎_beaengine\反汇编引擎_beaengine.vcxproj", "{3DEC7499-1BDC-4392-9D40-B93312C1CCA3}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "反汇编引擎_capstone", "反汇编引擎_capstone\反汇编引擎_capstone.vcxproj", "{40AAFBBA-C70C-4E71-8B4F-4FEF76C763FB}"
@@ -21,14 +19,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{70970FB4-6F67-4BAA-BB3D-3C1023196BBB}.Debug|x64.ActiveCfg = Debug|x64
-		{70970FB4-6F67-4BAA-BB3D-3C1023196BBB}.Debug|x64.Build.0 = Debug|x64
-		{70970FB4-6F67-4BAA-BB3D-3C1023196BBB}.Debug|x86.ActiveCfg = Debug|Win32
-		{70970FB4-6F67-4BAA-BB3D-3C1023196BBB}.Debug|x86.Build.0 = Debug|Win32
-		{70970FB4-6F67-4BAA-BB3D-3C1023196BBB}.Release|x64.ActiveCfg = Release|x64
-		{70970FB4-6F67-4BAA-BB3D-3C1023196BBB}.Release|x64.Build.0 = Release|x64
-		{70970FB4-6F67-4BAA-BB3D-3C1023196BBB}.Release|x86.ActiveCfg = Release|Win32
-		{70970FB4-6F67-4BAA-BB3D-3C1023196BBB}.Release|x86.Build.0 = Release|Win32
 		{3DEC7499-1BDC-4392-9D40-B93312C1CCA3}.Debug|x64.ActiveCfg = Debug|x64
 		{3DEC7499-1BDC-4392-9D40-B93312C1CCA3}.Debug|x64.Build.0 = Debug|x64
 		{3DEC7499-1BDC-4392-9D40-B93312C1CCA3}.Debug|x86.ActiveCfg = Debug|Win32
